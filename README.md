@@ -1,4 +1,4 @@
-﻿#BlazorTodoList
+﻿# BlazorTodoList
 
 Simple example app created for Blazor.net using the power of C# for web aplications.
 
