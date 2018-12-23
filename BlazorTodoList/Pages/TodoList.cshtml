@@ -1,0 +1,36 @@
+﻿@page "/todos"
+
+<h1>Todo List (@(viewModel.TodoList.FindAll(f => f.IsDone).Count))</h1>
+
+
+<div class="form-row">
+    <input class="form-control col-md-10" placeholder="Something todo" bind="@newTodo" />
+    <button class="btn btn-primary col-md-2" onclick="@Add">Add todo</button>
+</div>
+
+
+<ul class="list-group">
+    @foreach (var todo in viewModel.TodoList)
+    {
+    <li class="list-group-item">
+        <input class="form-control" type="text" bind="@todo.Title" />
+        <div class="form-check">
+            <input type="checkbox" bind="@todo.IsDone" class="form-check-input"/>
+            <label class="form-check-label">Completed</label>
+        </div>
+        <button class="btn btn-primary  col-md-2" onclick="@(() => viewModel.TodoList.Remove(todo))">DELETE</button>
+    </li>
+    }
+</ul>
+
+
+@functions{
+    BlazorTodoList.ViewModels.TodoViewModel viewModel = new BlazorTodoList.ViewModels.TodoViewModel();
+    string newTodo { get; set; }
+    int selectedCount { get; set; }
+
+    void Add()
+    {
+        viewModel.AddTodo(newTodo);
+    }
+}
